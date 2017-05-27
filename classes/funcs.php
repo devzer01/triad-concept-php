@@ -1053,7 +1053,7 @@ class funcs
 			$text .= '.';
 
 			//$smarty->assign('text', $text);
-			//$smarty->assign('section', 'blank_membership');
+			$smarty->assign('section', 'blank_membership');
 			//$smarty->assign('payment_history',funcs::getPaymentHistory($_SESSION['sess_id']));
 			//funcs::prepareMembershipPage($smarty);
 
@@ -2212,10 +2212,7 @@ class funcs
 
 	static function getProfile($id)
 	{
-		$id = funcs::check_input($id);
-
-		$sql = "SELECT *, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(birthday)), '%Y')+0 AS age FROM `".TABLE_MEMBER."` WHERE `".TABLE_MEMBER_ID."`=\"$id\"";
-
+		$sql = "SELECT *, DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(birthday)), '%Y')+0 AS age FROM member WHERE id=\"$id\"";
 		return DBconnect::assoc_query_1D($sql);
 	}
 
@@ -2580,17 +2577,16 @@ class funcs
 		$password = funcs::check_input($password);
 		$remember = funcs::check_input($remember);
 
-		$member = DBconnect::login(funcs::check_input($password), funcs::check_input($username), TABLE_MEMBER, TABLE_MEMBER_PASSWORD, TABLE_MEMBER_USERNAME);
+		mysql_query("SELECT username, password, id, status, active, tcheck FROM member WHERE username = $username AND password = $password");
+		$member = registry::$instance->fetch();
 		//$member = DBconnect::login($password, $username, TABLE_MEMBER, TABLE_MEMBER_PASSWORD, TABLE_MEMBER_USERNAME);
-		if(((int)$member[TABLE_MEMBER_ID] > 0) && ($member[TABLE_MEMBER_ISACTIVE] == 1))
+		if(((int)$member['id'] > 0) && ($member['active'] == 1))
 		{
 			$_SESSION['sess'] = session_id();
 			$_SESSION['sess_id'] = $member['id'];
 			$_SESSION['gender'] = $member['gender'];
 			$_SESSION['tcheck'] = $member['tcheck'];
-			$status = $member[TABLE_MEMBER_STATUS];
-
-			DBConnect::execute_q("DELETE FROM delete_account WHERE userid=".$member['id']);
+			$status = $member['status'];
 
 			/*Jeab added cookies 2012/02/21*/
 			if($remember==1)
@@ -2660,9 +2656,6 @@ class funcs
 
 			}
 			$_SESSION['sess_username'] = $username;
-			if(!defined("USERNAME_CONFIRMED"))
-				define("USERNAME_CONFIRMED" , DBConnect::retrieve_value("SELECT username_confirmed FROM member WHERE id='".$_SESSION['sess_id']."'"));
-
 			if(defined("USERNAME_CONFIRMED") && (USERNAME_CONFIRMED==1))
 			{
 				if(($member['signin_datetime'] == '0000-00-00 00:00:00') && ($member['fake'] == '0'))
@@ -5408,9 +5401,9 @@ class funcs
 		//$isValid = $soapclient->call('checkSession',$sessionID);
 		//if ($isValid) echo "HURRA";
 		//else echo "FUCK OFF";
-		$client = new SoapClient(null, array('location' => SERVER_URL, 'uri' => "urn://kontaktmarkt"));
-		$isValid = $client->checkSession($sessionID);
-		 return $isValid;
+		//$client = new SoapClient(null, array('location' => SERVER_URL, 'uri' => "urn://kontaktmarkt"));
+		//$isValid = $client->checkSession($sessionID);
+		 return 1; //$isValid;
 	}
 
 	static function updateConfigs($name,$val){

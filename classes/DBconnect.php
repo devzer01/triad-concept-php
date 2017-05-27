@@ -221,24 +221,8 @@ class DBconnect
 	*/
 	static function assoc_query_2D($sql)
 	{
-		list($usec, $sec) = explode(' ',microtime());
-		$querytime_before = ((float)$usec + (float)$sec);
-		$result = mysql_query($sql);
-		list($usec, $sec) = explode(' ',microtime());
-		$querytime_after = ((float)$usec + (float)$sec);
-		$querytime = $querytime_after - $querytime_before;
-		savelog("[".$querytime."] => ".$sql);
-
-		$arr = array();
-		$row = array();
-		if($result){
-			while($row = mysql_fetch_assoc($result))
-				array_push($arr, $row);
-		}else{
-		  	return 0;
-		}
-			
-		return $arr;
+	    mysql_query($sql);
+	    return registry::$stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	/**
@@ -426,19 +410,8 @@ class DBconnect
 	*/
 	static function retrieve_value($sql)
 	{
-		list($usec, $sec) = explode(' ',microtime());
-		$querytime_before = ((float)$usec + (float)$sec);
-		$result = mysql_query($sql);
-		list($usec, $sec) = explode(' ',microtime());
-		$querytime_after = ((float)$usec + (float)$sec);
-		$querytime = $querytime_after - $querytime_before;
-		savelog("[".$querytime."] => ".$sql);
-		if($result!=null)
-			$row = mysql_fetch_row($result);
-		if(is_array($row))
-			return current($row);
-		else
-			return false;
+	    mysql_query($sql);
+	    return registry::$stmt->fetchColumn(0);
 	}
 
 	/**

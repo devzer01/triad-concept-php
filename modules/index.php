@@ -29,7 +29,8 @@ $smarty->assign("FLonelyHeart", $fData);
 if(isset($_SESSION['sess_id']) && ($_SESSION['sess_id']!=""))
 {
 	//Get new messages's contact
-	$recent_contacts = DBconnect::assoc_query_2D("SELECT m.username, m.id, m.picturepath, i.datetime, i.status FROM message_inbox i LEFT JOIN member m ON i.from_id=m.id WHERE i.to_id=".$_SESSION['sess_id']." AND m.username IS NOT NULL AND m.id > 3 AND m.picturepath != '' GROUP BY m.username ORDER BY i.datetime DESC LIMIT " . RECENT_CONTACTS );
+	$sql = "SELECT m.username, m.id, m.picturepath, i.datetime, i.status FROM message_inbox i LEFT JOIN member m ON i.from_id=m.id WHERE i.to_id=".$_SESSION['sess_id']." AND m.username IS NOT NULL AND m.id > 3 AND m.picturepath != '' GROUP BY m.username ORDER BY i.datetime DESC LIMIT " . RECENT_CONTACTS;
+    $recent_contacts = DBconnect::assoc_query_2D($sql);
 	$smarty->assign("recent_contacts", $recent_contacts);
 }
 
@@ -72,8 +73,6 @@ if ($enableDoor) {
 			$landing = $landings[array_rand($landings)];
 		}
 		setcookie('landing', $landing, time()+60*60*24*365);
-		$sql = "INSERT INTO landing (landing_time) VALUES (NOW()) ";
-		mysql_query($sql);
 	}
 }
 

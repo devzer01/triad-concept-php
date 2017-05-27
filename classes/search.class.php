@@ -196,53 +196,9 @@ class Search{
 
 	static function getAllProfiles($username, $next, $limit)
 	{
-		if($limit > 1000)
-		{
-			$limit = 1000;
-		}
-
-		$sql1  = "select m.* from member as m where (m.isactive='1')";
-		$sql2  = ($username!="")? " and (m.username like '%$username%') " : "";
-		$sql3 .= " order by fake, birthday desc, last_action_to limit $next,$limit";
-
-		$sql = $sql1.$sql2.$sql3;
-
-		$query = @mysql_query($sql);
-		$j = 0;
-		if(@mysql_num_rows($query)>0){
-			while($rs=@mysql_fetch_array($query))
-			{
-				$arrTmp[] = $rs;
-				$arrFavor = Search::checkFavorite($_SESSION[sess_id], $arrTmp[$j][id]);
-				foreach($arrTmp as &$rec)
-				{
-					if(in_array($rec['id'], $arrFavor))
-					$rec['added'] = 1;
-				}
-				$j++;
-			}
-		}else{
-			$sql2  = ($username!="")? " and (m.username like '%$username%')" : "";
-			$sql = $sql1.$sql2.$sql3;
-				
-			$query = @mysql_query($sql);
-			if(@mysql_num_rows($query)>0){
-				while($rs=@mysql_fetch_array($query))
-				{
-					$arrTmp[] = $rs;
-					$arrFavor = Search::checkFavorite($_SESSION[sess_id], $arrTmp[$j][id]);
-					foreach($arrTmp as &$rec)
-					{
-						if(in_array($rec['id'], $arrFavor))
-						$rec['added'] = 1;
-					}
-					$j++;
-				}
-			}
-		}
-
-
-		return $arrTmp;
+	    $sql = "SELECT * FROM member WHERE username like '{$username}%'";
+	    mysql_query($sql);
+		return registry::$stmt->fetchAll();
 	}
 
 	//Einfache Suche:
@@ -269,6 +225,8 @@ class Search{
 		}
 		$sql4 = " order by if(picturepath = '',1,0), fake, birthday desc, last_action_to limit $next,$limit";
 		$sql = $sql1.$sql2.$sql3.$sql4;
+
+		echo $sql; exit;
 		$query = @mysql_query($sql);
 		$j = 0;
 		if(@mysql_num_rows($query)>0){

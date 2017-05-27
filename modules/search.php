@@ -204,7 +204,12 @@ if(isset($_GET['type']) && ($_GET['type']!=""))
 				{
 					if(count($male_id_arr))
 						$sql_male_id = " AND id NOT IN (".implode(',', $male_id_arr).") ";
-					$OnlineFakeMaleMembers = DBConnect::assoc_query_2D("SELECT id, username, picturepath FROM member WHERE 1 $sql_male_id AND gender=1 AND isactive=1 AND fake=1 AND picturepath!='' AND id>3 ORDER BY RAND() LIMIT ".$count);
+					    $OnlineFakeMaleMembers = [
+					        ['id' => 1, 'username' => 'foo', 'picturepath' => null],
+                            ['id' => 2, 'username' => 'bar', 'picturepath' => null],
+                            ['id' => 3, 'username' => 'do', 'picturepath' => null],
+                            ['id' => 4, 'username' => 'me', 'picturepath' => null],
+                        ]; //DBConnect::assoc_query_2D("SELECT id, username, picturepath FROM member WHERE 1 $sql_male_id AND gender=1 AND isactive=1 AND fake=1 AND picturepath!='' AND id>3 ORDER BY RAND() LIMIT ".$count);
 
 					if(is_array($OnlineFakeMaleMembersOld))
 						$OnlineFakeMaleMembers = array_merge($OnlineFakeMaleMembers, $OnlineFakeMaleMembersOld);

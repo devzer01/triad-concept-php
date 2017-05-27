@@ -1,9 +1,10 @@
 <?php
-session_start();	//session start
 require_once 'libs/mysql-connect/mysql.php';
 require_once('Mobile_Detect.php');
 $detect = new Mobile_Detect;
 $deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+//echo $deviceType; exit;
+if (!isset($_SESSION['lang'])) $_SESSION['lang'] = 'ger';
 
 $_SESSION['deviceType'] = $deviceType;
 
@@ -16,21 +17,13 @@ ini_set('allow_call_time_pass_reference', '1');
 require_once('classes/DBconnect.php');
 require_once('config.php');
 
+
 mysql_connect(MYSQL_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD) or die(mysql_error());
 mysql_select_db(MYSQL_DATABASE) or die("Selecting of database error!");
 mysql_query("SET NAMES UTF8");
 
-//$site_configs_filename = "classes/site_configs.inc.php";
-//if(!file_exists($site_configs_filename))
-//{
-	$site_configs = DBconnect::assoc_query_2D("SELECT * FROM `".TABLE_CONFIG."`");
-	//file_put_contents($site_configs_filename, serialize($site_configs));
-//}
-//else
-//{
-//	$site_configs = file_get_contents($site_configs_filename);
-//	$site_configs = unserialize($site_configs);
-//}
+
+$site_configs = DBconnect::assoc_query_2D("SELECT * FROM config");
 
 foreach($site_configs as $value)
 {
@@ -41,7 +34,7 @@ $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 $_SESSION['request'] = $_SERVER['REQUEST_URI'];
 
 //require classes and libs//
-require_once(SITE.'configs/'.$_SESSION['lang'].'.php');
+require_once('sites/orowo.oro.world/configs/ger.php');
 require_once('classes/funcs.php');
 require_once('classes/funcs2.php');
 require_once(SITE.'sms.php');
@@ -49,15 +42,14 @@ require_once('classes/search.class.php');
 require_once('Mail.php');
 require_once('Mail/mime.php');
 require_once('libs/SmartyPaginate.class.php');
-require_once('classes/smarty_web.php');
+require_once('libs/SmartyBC.class.php');
 require_once('classes/class.phpmailer.php');
 
-//if(!isset($_SESSION['sess_id']) && isset($_GET['asession'])){
-if(isset($_GET['asession'])){
+$_SESSION['sess_externuser'] = 1;
+/*if(isset($_GET['asession'])){
   $animID = funcs::externalLogin($_GET['asession']);
   if($animID){
       $userInfo=funcs::getProfile(1);
-
       funcs::loginSite($userInfo['username'], $userInfo['password']);
       $_SESSION['sess_externuser']=$animID;
   }
@@ -69,7 +61,7 @@ elseif( isset($_GET['session']) ){
     funcs::loginSite($userInfo['username'], $userInfo['password']);
     $_SESSION['sess_externuser']=$animID;
   }
-}
+}*/
 
 if(!isset($_SESSION['sess_id']))
 {
@@ -79,10 +71,14 @@ if(!isset($_SESSION['sess_id']))
 	}
 }
 
-$smarty = new smarty_web();	//call smarty class
+$smarty = new SmartyBC();	//call smarty class
 
+$smarty->setCacheDir('sites/orowo.oro.world/cache');
+$smarty->setCompileDir('sites/orowo.oro.world/templates_c');
+$smarty->setConfigDir('sites/orowo.oro.world/config');
+$smarty->setTemplateDir('sites/orowo.oro.world/templates');
 //require config language file//
-$smarty->config_load($_SESSION['lang'].'.conf');
+$smarty->config_load('sites/orowo.oro.world/configs/eng.conf');
 
 //send choice to template//
 $smarty->assign('gender', funcs::getChoice($_SESSION['lang'],'','$gender'));
@@ -175,7 +171,3 @@ if(isset($_SESSION['sess_username']))
 }
 
 $smarty->assign('deviceType', $deviceType);
-
-/*include('modules/checkprofile.php');
-$smarty->assign('total_score', number_format($total_score));
-$smarty->assign('progress_score', $progress_final);*/

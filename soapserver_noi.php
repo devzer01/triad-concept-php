@@ -1,7 +1,7 @@
 <?php
-define("LANGUAGE", "eng");
+define("LANGUAGE", "en");
 require_once('classes/top.class.php');
-//require_once('configs/eng.php');
+//require_once('configs/en.php);
 
 define("PAYMENT_SERVER_IP", "188.132.221.114");
 #set_time_limit(120);
@@ -38,9 +38,9 @@ function getProfileFull($id)
 			array('Coins',$profile['coin']),
 			array('Mobile number',(($profile['mobileno']=="")?"No":"Yes")),
 			array('<br><b>Address</b>',''),
-			array('City',funcs::removeEncodingProbs(funcs::getAnswerCity('eng',$profile['city']))),
-			array('State',funcs::removeEncodingProbs(funcs::getAnswerState('eng',$profile['state']))),
-			array('Country',funcs::removeEncodingProbs(funcs::getAnswerCountry('eng',$profile['country']))),
+			array('City',funcs::removeEncodingProbs(funcs::getAnswerCity('en',$profile['city']))),
+			array('State',funcs::removeEncodingProbs(funcs::getAnswerState('en',$profile['state']))),
+			array('Country',funcs::removeEncodingProbs(funcs::getAnswerCountry('en',$profile['country']))),
 
 			array('<br><b>Searching for</b>',''),
 			array('Man',(($profile['lookmen']==1)?'<b>Yes</b>':'No'),'lookmen',array('No','Yes'),$profile['lookmen']),
@@ -61,8 +61,8 @@ function getProfileFull($id)
 			array('Partner exchange',(($profile['partner_exchange']==1)?'<b>Yes</b>':'No'),'partner_exchange',array('No','Yes'),$profile['partner_exchange']),
 			array('Voyeurism',(($profile['voyeurism']==1)?'<b>Yes</b>':'No'),'voyeurism',array('No','Yes'),$profile['voyeurism']),
 			array('<br><b>Details</b>',''),
-			array('Height',($profile['height']>0) ? funcs::getAnswerChoice('eng','', '$height', $profile['height']) : "",'height',eng::$height,$profile['height']),
-			array('Weight',($profile['weight']>0) ? funcs::getAnswerChoice('eng','', '$weight', $profile['weight']) : "",'weight',eng::$weight,$profile['weight']),
+			array('Height',($profile['height']>0) ? funcs::getAnswerChoice('en','', '$height', $profile['height']) : "",'height',en::$height,$profile['height']),
+			array('Weight',($profile['weight']>0) ? funcs::getAnswerChoice('en','', '$weight', $profile['weight']) : "",'weight',en::$weight,$profile['weight']),
 
 			array('Appearance',getArrayElement(array('No comment','slender','normal','athletic','chubby','rounded'),$profile['appearance']),'appearance',array('No comment','slender','normal','athletic','chubby','rounded'),$profile['appearance']),
 			array('Eye color',getArrayElement(array('No comment','brown','blue','green','other'),$profile['eyescolor']),'eyescolor',array('No comment','brown','blue','green','other'),$profile['eyescolor']),
@@ -89,10 +89,10 @@ function getProfileFull($id)
 function getProfileInfo($id)
 {
   $profile = funcs::getProfile($id);
-  $city = funcs::getAnswerCity('eng',$profile['city']);
+  $city = funcs::getAnswerCity('en',$profile['city']);
   $area = funcs::getAnswerArea($profile['city']);
-  $state = funcs::getAnswerState('eng',$profile['state']);
-  $country = funcs::getAnswerCountry('eng',$profile['country']);
+  $state = funcs::getAnswerState('en',$profile['state']);
+  $country = funcs::getAnswerCountry('en',$profile['country']);
 
   if ($profile['mobileno'] == '')
 	$mobileno = '000';

@@ -30,8 +30,9 @@ $profile = DBConnect::assoc_query_1D("SELECT * FROM member WHERE id=".$_SESSION[
 $smarty->assign("MyPicture",$profile['picturepath']);
 
 //Get new messages's contact
-$recent_contacts = DBconnect::assoc_query_2D("SELECT m.username, m.id, m.picturepath, i.datetime, i.status FROM message_inbox i LEFT JOIN member m ON i.from_id=m.id WHERE i.to_id=".$_SESSION['sess_id']." AND m.username IS NOT NULL AND m.id>3 GROUP BY m.username ORDER BY i.datetime DESC LIMIT " . RECENT_CONTACTS );
-
+$sql = "SELECT m.username, m.id, m.picturepath, i.datetime, i.status FROM message_inbox i LEFT JOIN member m ON i.from_id=m.id WHERE i.to_id=".$_SESSION['sess_id']." AND m.username IS NOT NULL AND m.id>3 GROUP BY m.username ORDER BY i.datetime DESC LIMIT " . RECENT_CONTACTS;
+echo $sql; exit;
+$recent_contacts = DBconnect::assoc_query_2D($sql);
 $smarty->assign("recent_contacts", $recent_contacts);
 
 $random_contacts = DBconnect::assoc_query_2D("SELECT username, id, picturepath FROM member WHERE gender=".($profile['gender']=="1"?"2":"1")." AND isactive=1 AND fake=1 AND id>3 ORDER BY RAND() LIMIT " . RANDOM_CONTACTS);

@@ -2,7 +2,7 @@
 if(!isset($_COOKIE['domain']))
 {
 	//header("location: domains.php");
-	$domain = "flirten48.v2";
+	$domain = "orowo.oro.world.oro.world";
 }
 else
 {
@@ -10,14 +10,14 @@ else
 }
 define('TABLE_CONFIG', 'config'); //config table config in database
 
-$domain = str_replace("www.","",$domain);
+//$domain = str_replace("www.","",$domain);
 if(!empty($domain) && is_dir("sites/".$domain))
 {
 	define('SITE','sites/'.$domain.'/');
 }
 else
 {
-	define('SITE','sites/orowo/');
+	define('SITE','sites/orowo.oro.world/');
 }
 define('UPLOAD_DIR', SITE."thumbs/");
 define('UPLOAD_DIR_CARD', SITE."images/card/");
@@ -28,4 +28,6 @@ define("URL_WEB", "http://".$_SERVER['SERVER_NAME'].$dir);
 define("PROFILE_PICS_PATH",	dirname($_SERVER["SCRIPT_FILENAME"])."/profilepics/");
 
 require(SITE."config.php");
+
+define('ONLINE_MEMBERS_DATETIME', 100);
 ?>
