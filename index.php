@@ -1,6 +1,7 @@
 <?php
-//error_reporting(E_ALL);
-//ini_set('display_errors', 1);
+if (!isset($_GET['type'])) {
+    $_GET['type'] = (['men', 'women'])[rand(0, 1)];
+}
 session_start();
 require_once('classes/top.class.php');
 $smarty->debugging = false;
