@@ -209,20 +209,20 @@ class DBconnect
 	* @param string $expr3 The third expression used in IF().
 	* @return void
 	*/
-	static function adv_mysql_if($expr1, $expr2, $expr3)
+	static function insert_query_ID($sql, $params)
 	{
-	  	return " IF(".$expr1.",".$expr2.",".$expr3.")";
+        if (!is_null($params) && is_array($params) && !empty($params)) {
+            $stmt = registry::$instance->prepare($sql);
+            $stmt->execute($params);
+            return registry::$instance->lastInsertId();
+        }
 	}
 
-	/**
-	* Returns a 2D associative array as a result from the sql query, we use this when we know we will get a 2D result.
-	* @param string $sql The sql string to use.
-	* @return mixed The resultant 2D array if the query is successful, otherwise 0. 
-	*/
-	static function assoc_query_2D($sql)
+	static function assoc_query_2D($sql, $params = null)
 	{
-	    mysql_query($sql);
-	    return registry::$stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = registry::$instance->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	/**

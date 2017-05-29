@@ -1,23 +1,7 @@
 <?php
 require_once 'libs/mysql-connect/mysql.php';
-require_once('Mobile_Detect.php');
-$detect = new Mobile_Detect;
-$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
-//echo $deviceType; exit;
-if (!isset($_SESSION['lang'])) $_SESSION['lang'] = 'ger';
-
-$_SESSION['deviceType'] = $deviceType;
-
-if(!isset($_SESSION['state']) || !$_SESSION['state'])
-	$_SESSION['state'] = md5(uniqid(rand(), TRUE));
-header('P3P:CP="NOI DSP COR NID BUS"');
-setlocale(LC_TIME, 'en_UK.UTF8');
-ini_set('allow_call_time_pass_reference', '1');
-
 require_once('classes/DBconnect.php');
 require_once('config.php');
-
-
 mysql_connect(MYSQL_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD) or die(mysql_error());
 mysql_select_db(MYSQL_DATABASE) or die("Selecting of database error!");
 mysql_query("SET NAMES UTF8");
@@ -46,22 +30,6 @@ require_once('libs/SmartyBC.class.php');
 require_once('classes/class.phpmailer.php');
 
 $_SESSION['sess_externuser'] = 1;
-/*if(isset($_GET['asession'])){
-  $animID = funcs::externalLogin($_GET['asession']);
-  if($animID){
-      $userInfo=funcs::getProfile(1);
-      funcs::loginSite($userInfo['username'], $userInfo['password']);
-      $_SESSION['sess_externuser']=$animID;
-  }
-}
-elseif( isset($_GET['session']) ){
-  $animID = funcs::externalLogin($_GET['session']);
-  if($animID){
-    $userInfo=funcs::getProfile(2);
-    funcs::loginSite($userInfo['username'], $userInfo['password']);
-    $_SESSION['sess_externuser']=$animID;
-  }
-}*/
 
 if(!isset($_SESSION['sess_id']))
 {
@@ -77,7 +45,6 @@ $smarty->setCacheDir('sites/orowo.oro.world/cache');
 $smarty->setCompileDir('sites/orowo.oro.world/templates_c');
 $smarty->setConfigDir('sites/orowo.oro.world/config');
 $smarty->setTemplateDir('sites/orowo.oro.world/templates');
-//require config language file//
 $smarty->config_load('sites/orowo.oro.world/configs/eng.conf');
 
 //send choice to template//
@@ -169,5 +136,3 @@ if(isset($_SESSION['sess_username']))
 		define("USERNAME_CONFIRMED" , $_SESSION['USERNAME_CONFIRMED']);
 	}
 }
-
-$smarty->assign('deviceType', $deviceType);

@@ -28,11 +28,22 @@ function mysql_fetch_assoc() {
     return registry::$stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+function instance() {
+    //return
+}
+
+
+
 class registry {
     public static $instance = null;
     public static $count = null;
     public static $result = null;
     public static $stmt = null;
+    public static $topic = null;
+
+    public static function execute($sql, $params) {
+        //registry::$instance = n
+    }
 }
 
 class db {
