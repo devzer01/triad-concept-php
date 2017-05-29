@@ -1,0 +1,19 @@
+{
+  "name": "soulactos.com",
+  "version": "1.0.0",
+  "description": "anonymous support group to express innerself",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devzer01/triad-concept-php.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devzer01/triad-concept-php/issues"
+  },
+  "homepage": "https://github.com/devzer01/triad-concept-php#readme"
+}
