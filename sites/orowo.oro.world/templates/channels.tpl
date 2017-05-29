@@ -18,11 +18,12 @@
 <hr style="margin-top: 10px;" />
 <div class="col-xs-3">
     <div class="col-xs-12 speak">
-        <h3 style="text-align: center;" id="title"><i>"Am i Alone?"</i></h3>
+        <h3 style="text-align: center;" id="title"><i>"{$channel.topic}"</i></h3>
         <hr/>
         <div class="msg-container" id="msg-container">
-            <p class="message">John: I think there are other living beings in this universe.</p>
-            <p class="message">Jane: I have seen some things i can't explain.</p>
+            {foreach from=$messages item=message}
+                <p class="message">{$message.sender}: {$message.msg}</p>
+            {/foreach}
         </div>
         <div class="msg">
             <hr/>
