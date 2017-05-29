@@ -1,7 +1,7 @@
 <?php
 $id = $_GET['id'];
 $result = [];
-$channel = DBconnect::assoc_query_2D("SELECT topic FROM channel WHERE id = :id ORDER BY ts DESC", [':id' => $id]);
+$channel = DBconnect::assoc_query_2D("SELECT id, topic FROM channel WHERE id = :id ORDER BY ts DESC", [':id' => $id]);
 $msgs = DBconnect::assoc_query_2D("SELECT message FROM message WHERE topic_id = :id ORDER BY ts DESC", [':id' => $id]);
 
 $messages = [];

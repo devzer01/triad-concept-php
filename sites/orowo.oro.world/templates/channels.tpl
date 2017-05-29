@@ -28,7 +28,7 @@
         <div class="msg">
             <hr/>
             <textarea id="msg" rows="2" cols="40"></textarea>
-            <button id="send" data-topic-id="0">Send</button>
+            <button id="send" data-topic-id="{$channel.id}">Send</button>
         </div>
     </div>
 </div>
