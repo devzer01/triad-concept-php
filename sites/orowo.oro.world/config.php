@@ -20,11 +20,16 @@ define('MAIL_PORT',"25");
 define('MAIL_USERNAME',"noreply@yourbuddy24.com");
 define('MAIL_PASSWORD',"0gHC6vEySry9");
 
+
 //DATABASE
 define('MYSQL_SERVER',"localhost");
 define('MYSQL_USERNAME',"chai");
 define('MYSQL_PASSWORD',"chai");
-define('MYSQL_DATABASE',"orochat");
+if (strstr($_SERVER['SERVER_NAME'], 'pituwa')) {
+    define('MYSQL_DATABASE', "pituchat");
+} else {
+    define('MYSQL_DATABASE', "orochat");
+}
 
 //PREFERENCES
 define('RECENT_CONTACTS',4);

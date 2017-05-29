@@ -45,7 +45,11 @@ $smarty->setCacheDir('sites/orowo.oro.world/cache');
 $smarty->setCompileDir('sites/orowo.oro.world/templates_c');
 $smarty->setConfigDir('sites/orowo.oro.world/config');
 $smarty->setTemplateDir('sites/orowo.oro.world/templates');
-$smarty->config_load('sites/orowo.oro.world/configs/eng.conf');
+if (strstr($_SERVER['SERVER_NAME'], 'pituwa')) {
+    $smarty->config_load('sites/orowo.oro.world/configs/sin.conf');
+} else {
+    $smarty->config_load('sites/orowo.oro.world/configs/sin.conf');
+}
 
 //send choice to template//
 $smarty->assign('gender', funcs::getChoice($_SESSION['lang'],'','$gender'));
