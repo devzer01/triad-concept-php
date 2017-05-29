@@ -4,7 +4,7 @@
         <input class="form-control" type="text" id="topic" placeholder="i am feeling lost! anybody out there?">
     </div>
     <div class="col-sm-1">
-        <button type="button" class="btn btn-primary btn-lg connect">Share View</button>
+        <button type="button" class="btn btn-primary btn-lg connect">{#SHAREVEW#}</button>
     </div>
     <div class="col-sm-3"></div>
     <div class="col-sm-2">
