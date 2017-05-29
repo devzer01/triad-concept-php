@@ -3,7 +3,7 @@
     <div class="col-sm-3">
         <input class="form-control" type="text" id="topic" placeholder="why does it always happen to me?">
     </div>
-    <div class="col-sm-3"><button type="button" class="btn btn-primary btn-lg connect">Connect</button></div>
+    <div class="col-sm-3"><button type="button" class="btn btn-primary btn-lg connect">Share View</button></div>
 </div>
 <div class="col-sm-12">
     <div class="col-sm-10"></div>

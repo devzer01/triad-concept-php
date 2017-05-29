@@ -28,6 +28,9 @@
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function (e) {
+        $(".join").click(function (e) {
+            document.location.href = '?action=channel&id=' + $(this).data("id");
+        });
         $(".connect").click(function (e) {
             var options = {
                 url: '/?action=connect',

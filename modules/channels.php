@@ -6,7 +6,8 @@ $msgs = DBconnect::assoc_query_2D("SELECT message FROM message WHERE topic_id = 
 
 $messages = [];
 foreach ($msgs as $msg) {
-    $messages = ['msg' => $msg['message'], 'sender' => $sender ];
+    $sender = ['John', 'Jane'][rand(0, 1)];
+    $messages[] = ['msg' => $msg['message'], 'sender' => $sender ];
 }
 
 $smarty->assign('channel', $channel[0]);
