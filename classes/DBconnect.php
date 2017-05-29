@@ -211,11 +211,9 @@ class DBconnect
 	*/
 	static function insert_query_ID($sql, $params)
 	{
-        if (!is_null($params) && is_array($params) && !empty($params)) {
-            $stmt = registry::$instance->prepare($sql);
-            $stmt->execute($params);
-            return registry::$instance->lastInsertId();
-        }
+        $stmt = registry::$instance->prepare($sql);
+        $stmt->execute($params);
+        return registry::$instance->lastInsertId();
 	}
 
 	static function assoc_query_2D($sql, $params = null)

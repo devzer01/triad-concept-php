@@ -13,6 +13,12 @@ switch($_GET['action'])
     case 'connect':
         include_once('modules/connect.php');
         break;
+    case 'msgs':
+        include_once('modules/msgs.php');
+        break;
+    case 'chat':
+        include_once('modules/chat.php');
+        break;
     case 'channel':
 	case 'channels':
 		include_once('modules/channels.php');

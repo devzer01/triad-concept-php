@@ -1,7 +1,7 @@
 <?php
 
 function mysql_connect($server, $username, $password) {
-    registry::$instance= new PDO("mysql:host=$server", $username, $password);
+    registry::$instance= new PDO("mysql:host=$server", $username, $password, [ PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     return registry::$instance;
 }
 
@@ -12,12 +12,16 @@ function mysql_select_db($dbname)
 }
 
 function mysql_query($sql) {
-    $stmt = registry::$instance->prepare($sql);
-    $stmt->execute();
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    registry::$count = count($rows);
-    registry::$stmt = $stmt;
-    return $rows;
+    try {
+        $stmt = registry::$instance->prepare($sql);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        registry::$count = count($rows);
+        registry::$stmt = $stmt;
+        return $rows;
+    } catch (Exception $e) {
+        //echo $e->getMessage();
+    }
 }
 
 function mysql_num_rows() {
@@ -42,7 +46,10 @@ class registry {
     public static $topic = null;
 
     public static function execute($sql, $params) {
-        //registry::$instance = n
+        $pdo = new PDO("mysql:host=" . MYSQL_SERVER . ';dbname=' . MYSQL_DATABASE, MYSQL_USERNAME, MYSQL_PASSWORD, [ PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        return $pdo->lastInsertId();
     }
 }
 

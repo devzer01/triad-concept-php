@@ -36,6 +36,7 @@
 
 .msg-container {
     height: 320px;
+    overflow-y: scroll;
 }
 
 .msg {

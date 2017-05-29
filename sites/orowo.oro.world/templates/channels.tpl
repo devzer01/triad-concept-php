@@ -18,16 +18,16 @@
 <hr style="margin-top: 10px;" />
 <div class="col-xs-3">
     <div class="col-xs-12 speak">
-        <h3 style="text-align: center;">"Am i Alone?"</h3>
+        <h3 style="text-align: center;" id="title"><i>"Am i Alone?"</i></h3>
         <hr/>
-        <div class="msg-container">
+        <div class="msg-container" id="msg-container">
             <p class="message">John: I think there are other living beings in this universe.</p>
             <p class="message">Jane: I have seen some things i can't explain.</p>
         </div>
         <div class="msg">
             <hr/>
             <textarea id="msg" rows="2" cols="40"></textarea>
-            <button id="send">Send</button>
+            <button id="send" data-topic-id="0">Send</button>
         </div>
     </div>
 </div>
@@ -40,12 +40,53 @@
         <div class="channel-portal">
             <h3 style="height: 100px;">"{$channel.topic}"</h3>
             <hr/>
-            <button class="btn">Join Conversation</button>
+            <button class="btn join" id="{$channel.id}" data-id="{$channel.id}" data-topic="{$channel.topic}">Join Conversation</button>
         </div>
     </div>
 {/foreach}
 </div>
 <script src="/bower_components/jquery/dist/jquery.min.js" crossorigin="anonymous"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+
+        $("#send").click(function (e) {
+            var msg = $("#msg").val();
+            var id = $(this).data("topic-id");
+            appendMessage( { msg: msg, sender: "me" } );
+            var options = {
+                url: '/?action=chat',
+                data: { topic_id: id, msg: msg },
+                method: 'POST',
+                dataType: 'json'
+            };
+            $.ajax(options).then(function (e) {
+                console.log(e);
+            });
+        });
+
+        $(".join").click(function (e) {
+            var topic = $(this).data('topic');
+            var topic_id = $(this).data('id');
+            $("#send").data('topic-id', topic_id);
+            $("#send").data('topic', topic);
+            $("#title").html('"<i>' + topic + '</i>"');
+            var options = {
+                url: '/?action=msgs',
+                data: { id: topic_id },
+                method: 'POST',
+                dataType: 'json'
+            };
+            $.ajax(options).then(function (e) {
+                $("#msg-container").html("");
+                $.each(e.msgs, function (k, v) { appendMessage(v); });
+            });
+        });
+    });
+
+    function appendMessage(v) {
+        $("#msg-container").append("<p class='message'>" + v.sender + ': ' + v.msg + "</p>");
+    }
+</script>
 </body>
 </html>
