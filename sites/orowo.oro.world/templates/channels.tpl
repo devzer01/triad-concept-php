@@ -16,8 +16,8 @@
 <h1 class="strong">{#HEADING#}</h1>
 <h4 class="tagline" style="font-size: 22px; margin-top: 20px;">{#TAG#}</h4>
 <hr style="margin-top: 10px;" />
-<div class="col-xs-3">
-    <div class="col-xs-12 speak">
+<div class="col-sm-3 col-xs-12">
+    <div class="col-sm-12 col-xs-12 speak">
         <h3 style="text-align: center;" id="title"><i>"{$channel.topic}"</i></h3>
         <hr/>
         <div class="msg-container" id="msg-container">
@@ -32,17 +32,15 @@
         </div>
     </div>
 </div>
-<div class="col-xs-8" style="text-align: right">&nbsp;</div>
-<div class="col-xs-3" style="">
+<div class="col-sm-8 hidden-xs" style="text-align: right">&nbsp;</div>
+<div class="col-sm-3 hidden-xs" style="">
 </div>
-<div class="col-xs-5" style="float: right">
+<div class="col-sm-5 col-xs-12" style="float: right">
 {foreach from=$channels item=channel}
-    <div class="col-sm-3" style="width: 50% !important;">
-        <div class="channel-portal">
-            <h3 style="height: 100px;">"{$channel.topic}"</h3>
-            <hr/>
-            <button class="btn join" id="{$channel.id}" data-id="{$channel.id}" data-topic="{$channel.topic}">{#TAKEPART#}</button>
-        </div>
+    <div class="col-sm-3 col-xs-6 channel-portal">
+        <h3>"{$channel.topic}"</h3>
+        <hr class="visible-xs"/>
+        <button class="btn join" id="{$channel.id}" data-id="{$channel.id}" data-topic="{$channel.topic}">{#TAKEPART#}</button>
     </div>
 {/foreach}
 </div>

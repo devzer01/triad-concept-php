@@ -16,13 +16,86 @@ h1.main {
 
 h1.strong {
     font-family: "Holtwood One SC";
-    font-size: 77px;
+    font-size: 55px;
     font-style: normal;
     font-variant: normal;
     font-weight: 500;
-    line-height: 52.8px;
+    line-height: 42.8px;
     text-align: right;
     color: black;
+}
+
+.well-creator {
+    margin-top: 30px;
+}
+
+.btn-view {
+    margin-top: 5px;
+    text-align: right;
+}
+
+.channel-highlight {
+    background-color: #1b6d85;
+    width: 100%; height: auto;
+    border-radius: 9px;
+    padding: 10px 10px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.join {
+    margin: 0 0;
+}
+
+.mobile-gap {
+    margin: 5px 0 0 0;
+    height: 10px;
+}
+
+.front-window-topic {
+    height: auto;
+    text-align: center;
+    font-style: italic;
+    margin: 0 0;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    h1.strong {
+        font-family: "Holtwood One SC";
+        font-size: 77px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 500;
+        line-height: 52.8px;
+        text-align: right;
+        color: black;
+    }
+
+    .well-creator {
+        margin-top: -150px;
+    }
+
+    .btn-view {
+        margin-top: inherit;
+        text-align: left;
+    }
+
+    .channel-highlight {
+        background-color: #1b6d85;
+        opacity: 0.8;
+        width: 250px; height: 140px;
+        border-radius: 9px;
+        padding: 10px 10px;
+        margin: 10px 0;
+        text-align: inherit;
+    }
+
+    .front-window-topic {
+        height: 50px;
+        font-style: italic;
+        text-align: inherit;
+    }
 }
 
 h4.tagline {
@@ -264,11 +337,3 @@ h4.tagline {
     transform: translate(80%, 5%)
 }
 
-.channel-highlight {
-    background-color: #1b6d85;
-    opacity: 0.8;
-    width: 250px; height: 140px;
-    border-radius: 9px;
-    padding: 10px 10px;
-    margin: 10px 0;
-}

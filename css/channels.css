@@ -1,11 +1,14 @@
 .channel-portal {
     background-color: #1b6d85;
     opacity: 0.8;
-    width: 250px; height: 220px;
-    text-align: center;
+    width: 45%; height: auto;
     border-radius: 9px;
-    padding: 10px 10px;
-    margin: 20px 20px;
+    padding: 5px;
+    margin: 5px 5px 5px 5px;
+}
+
+.channel-portal {
+    text-align: center;
 }
 
 .channel-portal h3 {
@@ -22,39 +25,95 @@
 }
 
 .speak {
-    width: 490px;
-    height: 600px;
+    width: 100%;
+    height: auto;
     background-color: #e1e3e4;
-    margin: 30px 0px 0px 20px;
+    margin: 0 0;
     border-radius: 5px;
-    padding: 20px 25px;
+    padding: 5px;
+}
+
+.msg-container {
+    height: auto;
+    overflow-y: scroll;
+}
+
+.msg {
+    height: 50px;
+    width: 100%;
+}
+
+.msg textarea {
+    height: 50px;
+    width: 80%;
+    float: left;
+}
+
+.msg button {
+    height: 50px;
+    float: left;
+    width: 20%;
+}
+
+.channel-portal h3 {
+    height: auto;
+}
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+    .channel-portal {
+        width: 250px; height: 220px;
+        text-align: center;
+        border-radius: 9px;
+        padding: 10px 10px;
+        margin: 20px 20px;
+    }
+
+    .speak {
+        width: 490px;
+        height: 600px;
+        background-color: #e1e3e4;
+        margin: 30px 0px 0px 20px;
+        border-radius: 5px;
+        padding: 20px 25px;
+    }
+
+    .msg-container {
+        height: 320px;
+        overflow-y: scroll;
+    }
+
+    .msg {
+        height: 150px;
+        width: 100%;
+    }
+
+    .msg textarea {
+        height: 120px;
+        width: 80%;
+        float: left;
+    }
+
+    .msg button {
+        height: 120px;
+        float: left;
+        width: 20%;
+    }
+
+    .channel-portal h3 {
+        height: 100px;
+    }
 }
 
 .message {
     margin: 2px 2px;
 }
 
-.msg-container {
-    height: 320px;
-    overflow-y: scroll;
-}
 
-.msg {
-    height: 150px;
-    width: 100%;
-}
 
-.msg textarea {
-    height: 120px;
-    width: 80%;
-    float: left;
-}
 
-.msg button {
-    height: 120px;
-    float: left;
-    width: 20%;
-}
 
 .notactive {
     background-color: antiquewhite;
