@@ -53,6 +53,7 @@
 
         $("#send").click(function (e) {
             var msg = $("#msg").val();
+            $("#msg").val("");
             var id = $(this).data("topic-id");
             appendMessage( { msg: msg, sender: "me" } );
             var options = {
