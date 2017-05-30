@@ -3,7 +3,7 @@
 //වද කා ගාර ය වධ ය වධ කවධ ය
 $topic_id = $_POST['id'];
 $result = [];
-$msgs = DBconnect::assoc_query_2D("SELECT * FROM message WHERE topic_id = :id ORDER BY ts DESC", [':id' => $topic_id]);
+$msgs = DBconnect::assoc_query_2D("SELECT * FROM message WHERE topic_id = :id ORDER BY ts", [':id' => $topic_id]);
 header("Content-type: application/json");
 foreach ($msgs as $msg) {
     $sender = ['John', 'Jane'][rand(0, 1)];
