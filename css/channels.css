@@ -34,7 +34,7 @@
 }
 
 .msg-container {
-    height: auto;
+    min-height: 150px;
     overflow-y: scroll;
 }
 
