@@ -18,27 +18,7 @@ $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 $_SESSION['request'] = $_SERVER['REQUEST_URI'];
 
 //require classes and libs//
-require_once('sites/orowo.oro.world/configs/ger.php');
-require_once('classes/funcs.php');
-require_once('classes/funcs2.php');
-require_once(SITE.'sms.php');
-require_once('classes/search.class.php');
-require_once('Mail.php');
-require_once('Mail/mime.php');
-require_once('libs/SmartyPaginate.class.php');
 require_once('libs/SmartyBC.class.php');
-require_once('classes/class.phpmailer.php');
-
-$_SESSION['sess_externuser'] = 1;
-
-if(!isset($_SESSION['sess_id']))
-{
-	if(isset($_COOKIE['username']) && isset($_COOKIE['password']))
-	{
-		funcs::checkCookie();
-	}
-}
-
 $smarty = new SmartyBC();	//call smarty class
 
 $smarty->setCacheDir('sites/orowo.oro.world/cache');
