@@ -14,9 +14,9 @@
 </head>
 <body class="container-fluid">
 <h1 class="strong">{#HEADING#}</h1>
-<h4 class="tagline" style="font-size: 22px; margin-top: 20px;">{#TAG#}</h4>
+<h4 class="tagline">{#TAG#}</h4>
 <hr style="margin-top: 10px;" />
-<div class="col-sm-3 col-xs-12">
+<div class="col-sm-5 col-xs-12 chat-container-left">
     <div class="col-sm-12 col-xs-12 speak">
         <h3 style="text-align: center;" id="title"><i>"{$channel.topic}"</i></h3>
         <hr/>
@@ -32,12 +32,9 @@
         </div>
     </div>
 </div>
-<div class="col-sm-8 hidden-xs" style="text-align: right">&nbsp;</div>
-<div class="col-sm-3 hidden-xs" style="">
-</div>
-<div class="col-sm-5 col-xs-12" style="float: right">
-{foreach from=$channels item=channel}
-    <div class="col-sm-3 col-xs-6 channel-portal">
+<div class="col-sm-7 col-xs-12" style="float: right;margin-top: 30px;background-color: gray;padding: 10px;text-align: right;opacity: 0.8; min-height: 610px">
+{foreach name=chn from=$channels item=channel}
+    <div class="col-sm-3 col-xs-6 channel-portal grad{{math equation="x % 3" x=$smarty.foreach.chn.index}}">
         <h3>"{$channel.topic}"</h3>
         <hr class="visible-xs"/>
         <button class="btn join" id="{$channel.id}" data-id="{$channel.id}" data-topic="{$channel.topic}">{#TAKEPART#}</button>
@@ -48,7 +45,6 @@
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
     $(document).ready(function (e) {
-
         window.setInterval(function () {
             refreshChatBox($("#send").data('topic-id'));
         }, 3000);

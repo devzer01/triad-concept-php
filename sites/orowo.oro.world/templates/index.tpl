@@ -12,7 +12,7 @@
 </head>
 <body class="container-fluid">
 <h1 class="strong">{#HEADING#}</h1>
-<h4 class="tagline" style="font-size: 22px; margin-top: 20px;">{#TAG#}</h4>
+<h4 class="tagline">{#TAG#}</h4>
 <div class="col-md-12 hidden-xs" style="height: 200px;"></div>
 <div class="col-xs-12 visible-xs" style="height: 50px;"></div>
 {if $smarty.get.type eq "men"}

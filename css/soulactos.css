@@ -101,7 +101,8 @@ h1.strong {
 h4.tagline {
     text-align: right;
     color: white;
-
+    font-size: 22px;
+    margin-top: 20px;
 }
 
 .header{
