@@ -23,8 +23,8 @@ define('MAIL_PASSWORD',"0gHC6vEySry9");
 
 //DATABASE
 define('MYSQL_SERVER',"localhost");
-define('MYSQL_USERNAME',"chai");
-define('MYSQL_PASSWORD',"chai");
+define('MYSQL_USERNAME',"orochat");
+define('MYSQL_PASSWORD',"orochat");
 if (strstr($_SERVER['SERVER_NAME'], 'pituwa')) {
     define('MYSQL_DATABASE', "pituchat");
 } else {
