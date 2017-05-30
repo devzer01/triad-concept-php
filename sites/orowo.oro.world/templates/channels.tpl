@@ -49,11 +49,13 @@
 <script type="text/javascript">
     $(document).ready(function (e) {
 
+        window.setInterval(function () {
+            refreshChatBox($("#send").data('topic-id'));
+        }, 3000);
+
         $("#send").click(function (e) {
             var msg = $("#msg").val();
-            $("#msg").val("");
             var id = $(this).data("topic-id");
-            appendMessage( { msg: msg, sender: "me" } );
             var options = {
                 url: '/?action=chat',
                 data: { topic_id: id, msg: msg },
@@ -61,8 +63,10 @@
                 dataType: 'json'
             };
             $.ajax(options).then(function (e) {
-                console.log(e);
+                $("#msg").val("");
+                appendMessage( { msg: msg, sender: "me" } );
             });
+
         });
 
         $(".join").click(function (e) {
@@ -71,18 +75,22 @@
             $("#send").data('topic-id', topic_id);
             $("#send").data('topic', topic);
             $("#title").html('"<i>' + topic + '</i>"');
-            var options = {
-                url: '/?action=msgs',
-                data: { id: topic_id },
-                method: 'POST',
-                dataType: 'json'
-            };
-            $.ajax(options).then(function (e) {
-                $("#msg-container").html("");
-                $.each(e.msgs, function (k, v) { appendMessage(v); });
-            });
+            refreshChatBox(topic_id);
         });
     });
+
+    function refreshChatBox(topic_id) {
+        var options = {
+            url: '/?action=msgs',
+            data: { id: topic_id },
+            method: 'POST',
+            dataType: 'json'
+        };
+        $.ajax(options).then(function (e) {
+            $("#msg-container").html("");
+            $.each(e.msgs, function (k, v) { appendMessage(v); });
+        });
+    }
 
     function appendMessage(v) {
         $("#msg-container").append("<p class='message'>" + v.sender + ': ' + v.msg + "</p>");
