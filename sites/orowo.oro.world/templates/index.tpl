@@ -31,9 +31,14 @@
             document.location.href = '?action=channel&id=' + $(this).data("id");
         });
         $(".connect").click(function (e) {
+            var topic = $("#topic").val();
+            if (topic.trim() == "") {
+                document.location.href = '?action=channel&id=1'
+                return;
+            }
             var options = {
                 url: '/?action=connect',
-                data: { topic: $("#topic").val(), x: '{$smarty.get.type}' },
+                data: { topic: topic, x: '{$smarty.get.type}' },
                 method: 'POST',
                 dataType: 'json'
             };
