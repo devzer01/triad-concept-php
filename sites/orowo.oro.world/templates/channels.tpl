@@ -16,7 +16,7 @@
         </div>
     </div>
 </div>
-<div class="col-sm-7 col-xs-12" style="float: right;margin-top: 30px;background-color: gray;padding: 10px;text-align: right;opacity: 0.8; min-height: 610px">
+<div class="col-sm-7 col-xs-12" style="float: right;margin-top: 30px;padding: 10px;text-align: right;opacity: 0.8; min-height: 610px">
 {foreach name=chn from=$channels item=channel}
     <div class="col-sm-3 col-xs-6 channel-portal grad{{math equation="x % 3" x=$smarty.foreach.chn.index}}">
         <h3>"{$channel.topic}"</h3>
