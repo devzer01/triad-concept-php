@@ -64,13 +64,19 @@
 @media (min-width: 768px) {
 
     .channel-portal {
-        width: 200px; height: auto;
+        width: 200px; height: 122px;
         text-align: center;
         border-radius: 9px;
         padding: 10px 10px;
         float: right;
         margin: 5px 10px;
         opacity: 0.9;
+    }
+
+    .channel-portal h3 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: 40px !important;
     }
 
     .speak {
