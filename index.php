@@ -19,6 +19,9 @@ switch($_GET['action'])
     case 'chat':
         include_once('modules/chat.php');
         break;
+    case 'css':
+        include_once ('modules/css.php');
+        break;
     case 'channel':
 	case 'channels':
 		include_once('modules/channels.php');

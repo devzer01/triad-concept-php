@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{#TITLE#}</title>
-    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link href="/bower_components/bootstrap-vertical-tabs/bootstrap.vertical-tabs.min.css" rel="stylesheet" crossorigin="anonymous">
-
-    <link href="/css/anonymous-{$smarty.get.type}.css" rel="stylesheet" type="text/css" />
-    <link href="/css/soulactos.css" rel="stylesheet" type="text/css" />
-    <link href="/css/channels.css" rel="stylesheet" type="text/css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Holtwood+One+SC" />
-</head>
-<body class="container-fluid">
-<h1 class="strong">{#HEADING#}</h1>
-<h4 class="tagline">{#TAG#}</h4>
+{include file="top.tpl"}
 <hr style="margin-top: 10px;" />
 <div class="col-sm-5 col-xs-12 chat-container-left">
     <div class="col-sm-12 col-xs-12 speak">
@@ -41,68 +25,4 @@
     </div>
 {/foreach}
 </div>
-<script src="/bower_components/jquery/dist/jquery.min.js" crossorigin="anonymous"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script type="text/javascript">
-    $(document).ready(function (e) {
-        window.setInterval(function () {
-            refreshChatBox($("#send").data('topic-id'));
-        }, 3000);
-
-        $("#send").click(function (e) {
-            var msg = $("#msg").val();
-            var id = $(this).data("topic-id");
-            var options = {
-                url: '/?action=chat',
-                data: { topic_id: id, msg: msg },
-                method: 'POST',
-                dataType: 'json'
-            };
-            $.ajax(options).then(function (e) {
-                $("#msg").val("");
-                appendMessage( { msg: msg, sender: "me" } );
-            });
-
-        });
-
-        $(".join").click(function (e) {
-            var topic = $(this).data('topic');
-            var topic_id = $(this).data('id');
-            $("#send").data('topic-id', topic_id);
-            $("#send").data('topic', topic);
-            $("#title").html('"<i>' + topic + '</i>"');
-            refreshChatBox(topic_id);
-        });
-    });
-
-    function refreshChatBox(topic_id) {
-        var options = {
-            url: '/?action=msgs',
-            data: { id: topic_id },
-            method: 'POST',
-            dataType: 'json'
-        };
-        $.ajax(options).then(function (e) {
-            $("#msg-container").html("");
-            $.each(e.msgs, function (k, v) { appendMessage(v); });
-        });
-    }
-
-    function appendMessage(v) {
-        $("#msg-container").append("<p class='message'>" + v.sender + ': ' + v.msg + "</p>");
-    }
-</script>
-<script>
-    {literal}
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-100091867-1', 'auto');
-    ga('send', 'pageview');
-    {/literal}
-
-</script>
-</body>
-</html>
+{include file="bottom.tpl"}
