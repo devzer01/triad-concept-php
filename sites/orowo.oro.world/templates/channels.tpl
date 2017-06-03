@@ -25,4 +25,13 @@
     </div>
 {/foreach}
 </div>
+<div class="col-sm-7 hidden-xs">&nbsp;</div>
+<div class="col-xs-12 col-sm-5" style="padding: 10px 10px; background-color: aliceblue; border-radius: 3px; margin-top:  10px;">
+    <div class="col-xs-12 col-sm-7">
+        <input class="form-control" style="width: 100%; " type="text" id="topic" placeholder="{#IDEA#}">
+    </div>
+    <div class="col-xs-12 col-sm-5 btn-view">
+        <button type="button" class="btn btn-primary btn-lg connect" style="width: 100%;">{#STARTTOPIC#}</button>
+    </div>
+</div>
 {include file="bottom.tpl"}

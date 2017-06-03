@@ -63,6 +63,10 @@
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
+    .btn-view {
+        margin-top: 1px !important;
+    }
+
     .channel-portal {
         width: 200px; height: 122px;
         text-align: center;
