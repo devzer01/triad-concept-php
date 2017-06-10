@@ -26,7 +26,6 @@
     </div>
 {/foreach}
 </div>
-<div class="col-sm-7 hidden-xs">&nbsp;</div>
 <div class="col-xs-12 col-sm-5 chat-area">
     <div class="col-xs-12 col-sm-7">
         <input class="form-control" style="width: 100%; " type="text" id="topic" placeholder="{#IDEA#}">

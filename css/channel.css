@@ -72,6 +72,7 @@
 
     .chat-area {
         float: right;
+        margin-top: 50px;
     }
 
     .ads_796x90 {
@@ -106,11 +107,11 @@
         height: auto;
         background-color: #e1e3e4;
         border-radius: 5px;
-        min-height: 550px;
+        min-height: 650px;
     }
 
     .msg-container {
-        height: 370px;
+        height: 470px;
         overflow-y: scroll;
     }
 
