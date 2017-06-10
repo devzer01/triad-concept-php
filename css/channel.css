@@ -59,9 +59,27 @@
     height: auto;
 }
 
+.chat-area {
+    padding: 10px 10px;
+    background-color: aliceblue;
+    border-radius: 3px;
+    margin-top:  10px;
+}
+
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+
+    .chat-area {
+        float: right;
+    }
+
+    .ads_796x90 {
+        margin-top: 50px;
+        float: left;
+        width: 100%;
+        text-align: center;
+    }
 
     .btn-view {
         margin-top: 1px !important;
