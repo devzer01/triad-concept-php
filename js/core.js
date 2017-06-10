@@ -50,6 +50,13 @@ $(document).ready(function (e) {
             $("#send").data('topic', topic);
             $("#title").html('"<i>' + topic + '</i>"');
             refreshChatBox(topic_id);
+
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            }
         });
     } else {
         $(".join").click(function (e) {

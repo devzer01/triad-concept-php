@@ -66,6 +66,12 @@
     margin-top:  10px;
 }
 
+.chat-container-left {
+    margin-top: 5px;
+    padding: 0 0;
+    min-height: 350px;
+}
+
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
