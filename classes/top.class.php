@@ -26,3 +26,14 @@ $smarty->setCacheDir('sites/orowo.oro.world/cache');
 $smarty->setConfigDir('sites/orowo.oro.world/config');
 $smarty->setTemplateDir('sites/orowo.oro.world/templates');
 
+function getMessages($id) {
+    $msgs = DBconnect::assoc_query_2D("SELECT message FROM message WHERE topic_id = :id ORDER BY ts DESC", [':id' => $id]);
+    $senderTemplate = [JOHN, JANE];
+    $messages = [];
+    $i = 1;
+    foreach ($msgs as $msg) {
+        $sender = $senderTemplate[2 % $i++];
+        $messages[] = ['msg' => $msg['message'], 'sender' => $sender ];
+    }
+    return $messages;
+}

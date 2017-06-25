@@ -51,6 +51,19 @@ class registry {
         $stmt->execute($params);
         return $pdo->lastInsertId();
     }
+
+    private static function setup($sql, $params)
+    {
+        self::$instance = new PDO("mysql:host=" . MYSQL_SERVER . ';dbname=' . MYSQL_DATABASE, MYSQL_USERNAME, MYSQL_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        self::$stmt = self::$instance->prepare($sql);
+        self::$stmt->execute($params);
+    }
+
+    public static function select($sql, $params)
+    {
+        self::setup($sql, $params);
+        return self::$stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 class db {
