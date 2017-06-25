@@ -6,7 +6,7 @@
         <hr/>
         <div class="msg-container" id="msg-container">
             {foreach from=$messages item=message}
-                <p class="message">{$message.sender}: {$message.msg}</p>
+                <p class="message">{#$message.sender#}: {$message.msg}</p>
             {/foreach}
         </div>
         <div class="msg">
